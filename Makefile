@@ -29,6 +29,12 @@ migrate-create:
 	fi	
 
 
+migrate-force:
+	@docker compose run --rm todo-postgres-migrate \
+		-path /migrations \
+		-database "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@todo-postgres:5432/${POSTGRES_DB}?sslmode=disable" \
+		force 0
+
 migrate-up:
 	@make migrate-action action=up
 	
